@@ -1,0 +1,43 @@
+service: nestjs-typeorm-serverless
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-plugin-optimize
+  - serverless-offline
+  - serverless-apigw-binary
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: production
+  region: us-east-1
+  memorySize: 712
+
+# for the 'serverless-plugin-optimize'
+package:
+  individually: true
+  
+  apigwBinary:
+    types:
+      - '*/*'
+
+functions:
+  main: # The name of the lambda function
+    # The module 'handler' is exported in the file 'src/lambda'
+    handler: src/lambda.handler
+    events:
+      - http:
+          path: /
+          method: ANY
+          #cors: true .... enabling cors is giving issues on AWS API gateway
+      - http:
+          path: /{any+}
+          method: ANY
+          #cors: true .... enabling cors is giving issues on AWS API gateway
+    environment:
+      DB_CONNECTION: 
+      DB_NAME: 
+      DB_USER: 
+      DB_PASSWORD: 
+      DB_PORT: 3306
+      NODE_ENV: dev
