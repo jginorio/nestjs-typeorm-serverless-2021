@@ -35,9 +35,9 @@ functions:
           method: ANY
           #cors: true .... enabling cors is giving issues on AWS API gateway
     environment:
-      DB_CONNECTION: 
-      DB_NAME: 
-      DB_USER: 
-      DB_PASSWORD: 
+      DB_CONNECTION: cien-divorcios-db.crbx29ji5uzp.us-east-1.rds.amazonaws.com
+      DB_NAME: ProdDB
+      DB_USER: root
+      DB_PASSWORD: 100Divorcios
       DB_PORT: 3306
       NODE_ENV: dev
